@@ -15,10 +15,9 @@ grunt build
 cd ..
 
 # build go app
-go install
-cp $GOPATH/bin/fleet-ui tmp/
+GOOS=linux GOARCH=amd64 go build -o tmp/fleet-ui *.go
 curl -s -L https://github.com/coreos/fleet/releases/download/v${FLEET_VERSION}/fleet-v${FLEET_VERSION}-linux-amd64.tar.gz | tar xz
 mv fleet-v${FLEET_VERSION}-linux-amd64/fleetctl tmp/
 rm -r fleet-v${FLEET_VERSION}-linux-amd64
 chmod +x tmp/fleetctl
-docker build -t purpleworks/fleet-ui:$DOCKER_IMAGE_VERSION .
+docker build -t annismckenzie/fleet-ui:$DOCKER_IMAGE_VERSION .
